@@ -22,7 +22,7 @@ def get_response(chat_id, message, history):
             }
         ]
         with open(f"logs/{chat_id}.txt","a") as f:
-            f.write(system)
+            f.write(message + "\n")
             f.close()
 
     history.append(
@@ -47,8 +47,8 @@ def get_response(chat_id, message, history):
     )
 
     with open(f"logs/{chat_id}.txt","a") as f:
-            f.write(answer)
-            f.close()
+        f.write(answer + "\n")
+        f.close()
 
     print(f"\033[0;34m{answer}\033[0m")
 
