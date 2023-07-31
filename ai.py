@@ -1,5 +1,6 @@
 import openai
 import os
+from utils import log
 import dotenv
 dotenv.load_dotenv()
 openai.api_key = os.getenv('OPENAI_KEY')
@@ -21,10 +22,8 @@ def get_response(chat_id, message, history):
                 "content": system
             }
         ]
-        with open(f"logs/{chat_id}.txt","a") as f:
-            f.write(message + "\n")
-            f.close()
-
+        log(chat_id, "system: " +system)
+    log(chat_id, "user: " +message)
     history.append(
         {
         "role": "user",
@@ -46,9 +45,7 @@ def get_response(chat_id, message, history):
         }
     )
 
-    with open(f"logs/{chat_id}.txt","a") as f:
-        f.write(answer + "\n")
-        f.close()
+    log(chat_id, "assistant: " +answer)
 
     print(f"\033[0;34m{answer}\033[0m")
 
